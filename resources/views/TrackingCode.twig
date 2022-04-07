@@ -36,6 +36,12 @@
 	{% set customerEmail = customerData.email %}
 	{% set customerId = customerData.id %}
 
+	{# In case we have a guest order the above code will not work therefore we must use customer service method getEmail #}
+
+	{% if customerEmail == null %}
+		{% set customerEmail = services.customer.getEmail() %}
+	{% endif %}
+
 	{% if ceresConfig.item.displayName == "itemName" %}
 		{% set displayName = "itemName" %}
 	{% elseif ceresConfig.item.displayName == "variationName" %}
