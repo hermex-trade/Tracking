@@ -2171,7 +2171,8 @@ const NEWSLETTER_OPT_IN         = "newsletter-opt-in";
 
 						    dataLayer.push ({
 					            "event": "orderConfirmation",
-                                "orderData": orderData,
+								"customerEmail": "{{ customerEmail|raw }}",
+								"orderData": orderData,
 					            "orderItems" : orderItems
 					        });
 						});
