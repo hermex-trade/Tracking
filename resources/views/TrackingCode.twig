@@ -1872,6 +1872,15 @@ const NEWSLETTER_OPT_IN         = "newsletter-opt-in";
 				{% set couponDiscount = data.totals.couponValue %}
 				{% set vatValue = data.order.amounts[0].vatTotal %}
 
+				{% if (customerEmail == null) or (customerEmail == "") %}
+					{% set billingAddress = data.order.billingAddress %}
+					{% for option in billingAddress.options %}
+						{% if option.typeId == 5 %}
+							{% set customerEmail = option.value %}
+						{% endif %}
+					{% endfor %}
+				{% endif %}
+
 				{% if config("Tracking.showNetPrices") == "false" %}
 					{% if data.order.amounts[0].vatTotal == 0 %}
 						{% set orderTotal = data.totals.totalNet %}
